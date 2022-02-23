@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+	<title>Homework 2 - AR - Using Three.js</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Homework 2 with three.js" author="JasonMahar">
+
+	<style>
+	 .header { text-align: center; padding: 10px;  width: 100%; height: 20%; background-color: black; color: coral; }
+	 .body { margin: 0; }
+	 .canvas { width: 100%; height: 70%; }
+	 .footer { padding: 10px; width: 100%; height: 10%; background-color: black; color: blue; }
+	</style>
+ </head>
+ 
+ <div class="header">
+    <h2>Homework 2 - AR - Using Three.js</h2>
+    <h3>by Jason Mahar</h3>
+    <p><a href ="https://ccsf.instructure.com/courses/47104/assignments/978538"> 
+		Module 3: Homework 2 - AR
+	</a></p>
+	<br />
+ </div>
+ 
+ <body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
+	<script>
+	 
+	// circle parameters:
+	// 		radius: radius,
+	//		segments: segments,
+	//		thetaStart: thetaStart,
+	//		thetaLength: thetaLength
+	const DEFAULT_RADIUS = 5;
+	const DEFAULT_SEGMENTS = 40;
+	const DEFAULT_THETA_START= 0;		// 0
+	const DEFAULT_THETA_LENGTH = 1;	//  Math.PI * 2
+
+	const COLOR_RED = 0xff0000;	
+	const CAMERA_DISTANCE_FROM_ORIGIN = 20;
+
+	 var scene = new THREE.Scene();
+	 var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+	 var renderer = new THREE.WebGLRenderer();
+	 renderer.setSize(window.innerWidth, window.innerHeight);
+	 document.body.appendChild(renderer.domElement);
+	 var geometry = new THREE.CircleGeometry(DEFAULT_RADIUS, DEFAULT_SEGMENTS);
+	 //var geometry = new THREE.CircleGeometry(DEFAULT_RADIUS, DEFAULT_SEGMENTS, DEFAULT_THETA_START, DEFAULT_THETA_LENGTH);
+	 var material = new THREE.MeshBasicMaterial( { color: COLOR_RED } );
+	 var circle  = new THREE.Mesh(geometry, material);
+	 scene.add(circle);
+	 camera.position.z = CAMERA_DISTANCE_FROM_ORIGIN;
+	 
+	 
+	 // kiara_2_sunrise_1k.hdr
+	 
+	 // renderer.render(scene, camera);
+	 var animate = function () {
+	 circle.rotation.x += 0.05;
+	 circle.rotation.y += 0.01;
+	 circle.rotation.z += 0.007;
+	 renderer.render(scene, camera);
+	 requestAnimationFrame(animate);
+	 };
+	 animate();
+	 
+	 
+	 </script>
+ </body>
+ 
+ <div class="footer">
+ 
+	<p>&copy; Jason Mahar </p>
+	<p><a href="mailto:jmahar1@mail.ccsf.edu">jmahar1@mail.ccsf.edu</a></p>
+
+ </div>
+ 
+</html>
